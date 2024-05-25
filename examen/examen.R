@@ -1,11 +1,29 @@
-x = seq(from=1,to=30,by=0.01)
-plot(x, pexp(x, 1/8), type="line")
+#################
+# Oefening 4.12 #
+#################
 
-# kans op 20 jaar geen elfstedentocht
-1-pexp(20,1/8)
+# X = werktijd per stuk
+# X ~ N(4,1^2)
 
-# kans op dit jaar een elfstedentocht
-pexp(1,1/8)
+# Y = werktijd voor 90 stuks
+# Y = 90X_
+# Y ~ N(90*4, sqrt(90)^2)
 
-# in welk jaar met 95 procent kans elfstedentocht zonder klimaatverandering
-qexp(0.95,1/8)
+# P(40Y<=kost) = P(Y<=kost/40) = 0.95
+# => kost = 40*Q(0.95)
+40*qnorm(0.95,90*4,sqrt(90))
+
+# Controle
+opl = 15024
+pnorm(opl/40, 90*4, sqrt(90))
+
+
+####################
+# Oefening '18-'19 #
+####################
+
+p = 1-ppois(27,lambda=30)
+
+pbinom(10, size=20, p)
+
+
