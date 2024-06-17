@@ -110,6 +110,8 @@ coef(model)
 #######
 
 logmodel$model
+attributes(logmodel)
+?lm
 # Regressoren:
 #   horsepo   kolom 2
 #   length    kolom 3

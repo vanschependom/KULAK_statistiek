@@ -231,7 +231,6 @@ lines(x,dexp(x,1/mu),col='blue') # Plot exp. verdeling met lamda=1/mu (EX(EXP)=1
 n = length(X)
 Q = -log(1-((1:n)-1/2)/n) # Bepaal theoretische kwantielen van exponentiele verdeling
 plot(Q,sort(X)) # Plot data ten opzichte van theoretische kwantielen
-qqplot(x=qexp(ppoints(100)),X)
 abline(lm(sort(X)~Q),col='red') # Plot er beste rechte door
 # Haal de outlier eruit (Dikke Mercedes)
 Q = -log(1-((1:(n-1))-1/2)/(n-1))

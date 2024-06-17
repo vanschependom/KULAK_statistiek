@@ -7,7 +7,6 @@ car_cont <- data.frame(minpr, engines,horsepo,RPM,revolu,length,
 
 ## 11.1 Correlatie
 cor(minpr,car_cont)
-par(mfrow=c(1,1))
 # Correlaties zijn voor de meeste maten positief
 # (prijs stijgt gemiddeld met toenemende engines/horsepo/...)
 # Behalve voor RPM en revolu die een negatieve associatie kennen
@@ -210,7 +209,6 @@ coef(domestimodel)[2]+coef(domestimodel)[7]
 # (beide intercepts niet significant verschillend)
 
 # Betekenis SLOPE [1 als voorbeeld, rest als oefening]
-summary(domestimodel)
 # per extra eenheid horsepo
 # zal minpr *volgens dit model* toenemen
 # met gemiddeld factor 1.006 of dus 0.6% (voor non-US)
@@ -219,8 +217,6 @@ summary(domestimodel)
 # de prijs van in de US geproduceerde wagens trager toeneemt naargelang
 # toenemende horsepo dan die van geïmporterde wagens
 # namelijk met gemiddeld FACTOR 0.998 per extra eenheid horsepo
-
-1.004/1.006
 
 ## EXTRA. Voorspellingen (zie R Manual sectie 5.4)
 

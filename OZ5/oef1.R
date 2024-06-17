@@ -21,7 +21,7 @@ plot(xd,dbinom(xd,n,p),type="h")
 
 
 
-# Benadering met poisson ( np(1-p)>5 en np(p)>5 )
+# Benadering met poisson ( np>5 en n>100 )
 
 # S_X2 = N
 

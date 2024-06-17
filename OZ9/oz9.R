@@ -45,11 +45,15 @@ t.test(hghwy, alternative="two.sided", mu=8.7)
 
 mean(hghwy)
 mean(city)
+mean(hghwy)*(4/3)
 
 # VOORWAARDE CLS
 length(na.omit(city-(4/3)*hghwy))
 
+V = city - (4/3)*hghwy
+
 t.test(x=city, y=(4/3)*hghwy, alternative="greater", paired=TRUE)
+t.test(V,alternative="greater")
 
 # 5. BESLUIT
 #   Er is geen reden om te twijfelen aan het feit dat
@@ -65,6 +69,36 @@ t.test(x=city, y=(4/3)*hghwy, alternative="greater", paired=TRUE)
 #######
 ## a ##
 #######
+
+summary(uturn)
+
+###### EXAMEN: #######
+
+# ongepaard
+X = uturn[type=="Sporty"]
+Y = uturn[type!="Sporty"]
+
+length(na.omit(X))
+length(na.omit(Y))
+
+qqnorm(X); qqline(X);
+shapiro.test(X);
+# X is ongeveer normaal verdeeld
+
+qqnorm(Y); qqline(Y);
+shapiro.test(Y);
+# Y is ongeveer normaal verdeeld
+
+# Beide variabelen zijn normaal verdeeld -> F-test voor variantie
+var.test(X,Y)
+# De varianties zijn gelijk
+
+# Omdat X en Y bij benadering normaal verdeeld zijn
+# en bovendien n_X = 14 en n_Y = 79, zijn Xstreep en Ystreep volgens de CLS
+# normaal verdeeld: de t-test is geldig. Bovendien zijn varianties gelijk.
+t.test(X,Y,alternative="two.sided",var.equal = TRUE)
+
+###### EXAMEN: #######
 
 # X = de ruimte voor een U-bocht van een sportieve auto
 x = uturn[type=="Sporty"]
@@ -117,6 +151,15 @@ t.test(x, y, alternative="two.sided", paired=FALSE, var.equal=TRUE)
 #######
 ## b ##
 #######
+
+X = uturn[drivetr=="front"]
+Y = uturn[drivetr=="rear"]
+
+length(na.omit(X))
+length(na.omit(Y))
+
+qqnorm(X); qqline(X); shapiro.test(X);
+qqnorm(Y); qqline(Y); shapiro.test(Y);
 
 # X = de plaats voor een U-bocht van auto's met voorwielaandrijving
 x = uturn[drivetr == "front"]
@@ -224,8 +267,8 @@ boxplot(x,y)
 #   We weten nog niet of de gegevens normaal verdeeld zijn
 
 # Test de normaliteit van X en Y
-shapiro.test(X); qqnorm(X); qqline(X);
-shapiro.test(Y); qqnorm(Y); qqline(Y);
+shapiro.test(x); qqnorm(x); qqline(x);
+shapiro.test(y); qqnorm(y); qqline(y);
 # --> de gegevens bezorgen ons een sterk vermoeden dat X en Y niet normaal verdeeld zijn.
 
 # Aangezien X en Y niet normaal verdeeld zijn, kijken we of de voorwaarden
@@ -260,7 +303,6 @@ wilcox.test(X,Y,paired=FALSE,alternative="two.sided")
 #   De gegevens suggereren dat beide gemiddelden verschillen,
 #   en meer specifiek dat het gemiddelde van X groter is dan
 #   het gemiddelde van Y (want de RS van X is kleiner dan verwacht)
-
 
 
 detach(cars)

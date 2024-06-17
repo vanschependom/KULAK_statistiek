@@ -46,3 +46,4 @@ table(type)
 means = tapply(horsepo, type, mean, na.rm=TRUE)
 levels(type)
 array(means)
+

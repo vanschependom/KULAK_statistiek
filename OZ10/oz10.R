@@ -19,6 +19,9 @@ shapiro.test(hghwy); qqnorm(hghwy); qqline(hghwy);
 shapiro.test(city); qqnorm(city); qqline(city);
 #   --> geen duidelijke afwijking van normaliteit
 
+plot(hghwy,city)
+# ongeveer elliptisch
+
 # Beiden normaal: Pearson Correlatie test
 #   H0: rho = 0
 #   H1: rho != 0
@@ -33,6 +36,9 @@ plot(hghwy, city)
 # 10.2 #
 ########
 # Meer airbags bij Amerikaanse constructeurs dan bij geimporteerde?
+
+summary(airbags)
+summary(domesti)
 
 # !!
 table(airbags, domesti)
@@ -58,6 +64,9 @@ test$residuals
 ########
 # Aantal cylinders afhankelijk van het type wagen?
 
+summary(cylin)
+summary(type)
+
 table(type, cylin)
 # --> wijst op afhankelijkheid, maar we moeten uiteraard nog testen!
 
@@ -73,8 +82,8 @@ test$expected # --> Cochranregel NIET voldaan!
 ####
 
 # hercoderen met cut
-cylin2 = cut(cylin, c(0,5,Inf), labels=c("3-4","5,6,8"), include.lowest=TRUE, right=FALSE)
-cylin2
+cylinder2 = cut(cylin, c(0,5,Inf), labels=c("3-4","5,6,8"), include.lowest=TRUE, right=FALSE)
+attributes(cylinder2)
 
 table(type, cylinder2)
 
@@ -117,8 +126,9 @@ type2[type=="Van"] = "Van+Large" # ERROR
 type2 = as.character(type)
 type2[type=="Van"] = "Van+Large"
 type2[type=="Large"] = "Van+Large"
+type2=as.factor(type2)
 
-test2 = chisq.test(cylin2, type2); test
+test2 = chisq.test(cylinder2, type2); test
 test2$expected
 
 
@@ -154,11 +164,12 @@ binom.test(x, n, p=0.11)
 
 table(transm, domesti)
 
-test = prop.test(c(6,26),c(45, 48));
+?prop.test
+test = prop.test(x=c(22,39), n=c(48,45), alternative="less")
 
-# Test voor afhankelijkheid
-#   H0: onafhankelijk
-#   H1: afhankelijk
+# Test voor twee proporties
+#   H0: gelijke proporties
+#   H1: p_1 < p_2
 test;
 # --> we kijken hier niet naar de residuen maar naar de proporties
 
@@ -175,7 +186,8 @@ fisher.test(table(transm,domesti))
 # compacte wagens?
 ###
 
-#...
+table(transm[type=="Compact"],domesti[type=="Compact"])
+fisher.test(table(transm[type=="Compact"],domesti[type=="Compact"]))
 
 
 detach(cars)

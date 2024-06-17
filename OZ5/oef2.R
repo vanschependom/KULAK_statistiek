@@ -13,7 +13,7 @@ pbinom(499,n,p)
 
 
 # benadering met Poisson
-n*p*(1*p) # groter dan 5
+n*p # groter dan 5
 
 # X2 ~ pois(lambda)
 lambda = n*p
